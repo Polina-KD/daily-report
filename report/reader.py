@@ -20,7 +20,7 @@ def read_file(file_path) -> list[Order]:
         return orders_list
 
 
-def validate_required_columns(headers_list: list[str] | None) -> None:
+def validate_required_columns(headers_list: object) -> None:
     if headers_list is None:
         raise MissingColumnError("Here is no list of headers.")
     elif not headers_list:
