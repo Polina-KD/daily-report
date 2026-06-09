@@ -1,6 +1,10 @@
-def main(name):
-    pass
+class InvalidCsvError(Exception):
+    """
+    Raised when the CSV contains invalid data.
+    """
 
 
-if __name__ == '__main__':
-    main()
+class MissingColumnError(Exception):
+    """
+    Raised when a required CSV column is missing.
+    """
