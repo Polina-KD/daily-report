@@ -1,14 +1,17 @@
-from report.reader import read_file
+import logging
+
 from report.models import ReportResult, Order
 
+logger = logging.getLogger(__name__)
 
-def create_report(path: str) -> ReportResult:
+
+def create_report(orders: list[Order]) -> ReportResult:
     """
-    Creates a report in the given path of CSV file.
-    :param path: path to CSV file.
+    Creates a report in the given list of read CSV file.
+    :param orders: list of read CSV file.
     :return: report result object.
     """
-    orders = read_file(path)
+    logger.info("Creating report...")
     return ReportResult(
         total_orders=calculate_total_number_of_orders(orders),
         total_revenue=calculate_total_revenue(orders),
@@ -84,5 +87,4 @@ def aggregate_by_key(non_unique_list: list[tuple[str, float]]) -> list[tuple[str
     uniq_list = list(uniq_dict.items())
     return uniq_list
 
-
-# print(create_report("D:/PyPrograms/orders.csv"))
+# print(create_report("D:/PyPrograms/order.csv"))

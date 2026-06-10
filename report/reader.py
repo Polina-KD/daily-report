@@ -1,30 +1,29 @@
 import csv
 import datetime
-
 import logging
 
+# from report.cli import logger
 from report.exceptions import InvalidCsvError, MissingColumnError
 from report.models import Order
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(filename='report.log', )
 
 
 def read_file(file_path) -> list[Order]:
     orders_list: list[Order] = []
+    logger.info("Reading CSV file...")
     with open(str(file_path), 'r', encoding="utf-8") as file:
         reader = csv.DictReader(file)
         validate_required_columns(reader.fieldnames)
         for row in reader:
             orders_list.append(parse_order_row(row))
-        return orders_list
+    logger.info(f"Read orders from {file_path} successfully.")
+    return orders_list
 
 
 def validate_required_columns(headers_list: object) -> None:
-    if headers_list is None:
-        raise MissingColumnError("Here is no list of headers.")
-    elif not headers_list:
-        raise MissingColumnError("The list of headers is empty.")
+    if headers_list is None or headers_list == []:
+        raise MissingColumnError("CSV contains no headers at all. Or the list of headers is empty.")
     required_columns: list[str] = ['order_id',
                                    'date',
                                    'customer',
@@ -34,14 +33,23 @@ def validate_required_columns(headers_list: object) -> None:
                                    'price']
     for required_column in required_columns:
         if required_column not in headers_list:
-            raise MissingColumnError(f'The column {required_column} is missed.')
+            raise MissingColumnError(f"Missing required column {required_column} in CSV file.")
     # for header in headers_list:
     #     if header not in required_columns:
     #         raise MissingColumnError(f'{header} is not a required column.')
 
 
+def is_row_broken(row: dict[str, str]) -> None:
+    if not row:
+        raise InvalidCsvError(f"Empty row: {row}")
+    for key, value in row.items():
+        if value is None or str(value).strip() == "":
+            raise InvalidCsvError(f"Broken {key} in row: {row}")
+
+
 def parse_order_row(row: dict[str, str]) -> Order:
     try:
+        is_row_broken(row)
         order = Order(order_id=int(row["order_id"]),
                       date=convert_str_to_date(row["date"]),
                       customer=row["customer"],
@@ -51,8 +59,8 @@ def parse_order_row(row: dict[str, str]) -> Order:
                       price=parse_price(row["price"]))
         return order
     except ValueError:
-        logger.error(f"{datetime.datetime.today()}:Invalid CSV format in {row}.")
-        raise InvalidCsvError(f"Invalid CSV format in {row}.")
+        raise InvalidCsvError(f"Invalid row {row}.")
+
 
 def convert_str_to_date(date: str) -> datetime.date:
     try:
@@ -61,7 +69,6 @@ def convert_str_to_date(date: str) -> datetime.date:
         try:
             return datetime.datetime.strptime(date, "%Y-%m-%d").date()
         except ValueError:
-            logger.error(f"{datetime.datetime.today()}:Invalid date format in {date}.")
             raise InvalidCsvError(f"Invalid date format in {date}.")
 
 
@@ -69,9 +76,8 @@ def parse_price(price: str) -> float:
     try:
         return float(price)
     except ValueError:
-        logger.error(f"{datetime.datetime.today()}:Could not convert price {price} to float.")
-        raise InvalidCsvError(f"Could not convert price {price} to float.")
+        # logger.error(f"Could not convert price {price} to float.")
+        raise InvalidCsvError(f"Invalid price format in {price}.")
 
-
-# read_orders = read_file("D:/PyPrograms/orders.csv")
+# read_orders = read_file("D:/PyPrograms/order.csv")
 # print(read_orders)

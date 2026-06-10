@@ -1,24 +1,29 @@
 import json
+import logging
 
+from report.exceptions import UnsupportedFileFormat
 from report.models import ReportResult
-from report.report import create_report
+
+logger = logging.getLogger(__name__)
 
 
-def write_report(input_path: str, output_path: str, file_format: str) -> None:
+def write_report(report: ReportResult, output_path: str, file_format: str) -> None:
     """
     Write report to a file (JSON or Markdown).
-    :param input_path: path to input file.
+    :param report: an instance of the ReportResult dataclass.
     :param output_path: path to output file.
     :param file_format: format of output file.
     :return: None.
     """
-    report = create_report(input_path)
     if file_format == "json":
         write_json(output_path, report)
+        logger.info(f"Report written to {output_path} in JSON format.")
     elif file_format == "markdown":
         write_markdown(output_path, report)
+        logger.info(f"Report written to {output_path} in Markdown format.")
     else:
-        raise ValueError(f"Unsupported file format: {file_format}")
+        raise UnsupportedFileFormat(f"Unsupported file format: {file_format}")
+
 
 def write_json(output_path: str, report: ReportResult) -> None:
     """
@@ -29,6 +34,7 @@ def write_json(output_path: str, report: ReportResult) -> None:
     """
     with open(output_path, 'w', encoding="utf-8") as outfile:
         json.dump(report.__dict__, outfile, indent=4)
+
 
 def write_markdown(output_path: str, report: ReportResult) -> None:
     """
@@ -56,4 +62,4 @@ def write_markdown(output_path: str, report: ReportResult) -> None:
         for name, value in report.revenue_by_category:
             outfile.write(f"- {name} — {value}\n")
 
-# write_report("D:/PyPrograms/orders.csv", "report.json", "json")
+# write_report("D:/PyPrograms/order.csv", "report.json", "json")
