@@ -1,6 +1,44 @@
-def main(name):
-    pass
+import argparse
+import logging
+
+from report.exceptions import InvalidCsvError, MissingColumnError, InvalidPriceFormat
+from report.reader import read_file
+from report.report import create_report
+from report.writer import write_report
 
 
-if __name__ == '__main__':
-    main()
+def setup_logging():
+    logging.basicConfig(filename='report.log', level=logging.INFO,
+                        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+
+
+def cli():
+    setup_logging()
+    logger = logging.getLogger("report-cli")
+    logger.info("CLI started")
+    parser = argparse.ArgumentParser(prog='Brightstone Logistics Report Generator',
+                                     description='Convert CSV to JSON or Markdown')
+    parser.add_argument('-i', '--input', required=True, type=str, help='Input CSV file path')
+    parser.add_argument('-o', '--output', required=True, type=str,
+                        help='“Output file with format (json or markdown)”')
+    parser.add_argument('-f', '--format', required=True, type=str, choices=['json', 'markdown'], )
+
+    args = parser.parse_args()
+    try:
+        orders_list = read_file(args.input)  # -> list[Order]
+        report_result = create_report(orders_list)  # -> An instance of the ReportResult class
+        write_report(report_result, args.output, args.format)  # -> None (create a file)
+    except InvalidCsvError as e:
+        logger.error(e)
+        print("InvalidCsvError: Invalid CSV format. Please check input file.")
+        exit(1)
+    except MissingColumnError as e:
+        logger.error(e)
+        print("MissingColumnError: Column not found. Please check input file.")
+        exit(1)
+    except InvalidPriceFormat as e:
+        logger.error(e)
+        print("InvalidPriceFormat: Invalid price format. Please check input file.")
+        exit(1)
+    logger.info("CLI finished successfully")
