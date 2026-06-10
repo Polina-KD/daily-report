@@ -37,4 +37,14 @@ def cli():
         logger.error(e)
         print("MissingColumnError: Column not found. Please check input file.")
         exit(1)
-    logger.info("CLI finished successfully!")
+    except OSError as e:
+        logger.error(e)
+        print("Configuration error: cannot access file system.")
+        exit(2)
+    except Exception as e:
+        logger.error(e)
+        print("Unexpected error.")
+        exit(2)
+    else:
+        logger.info("CLI finished successfully!")
+        exit(0)
