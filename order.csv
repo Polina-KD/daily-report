@@ -1,0 +1,11 @@
+order_id,date,customer,product,category,quantity,price
+1,08-06-2026,Jan de Jong,Samsung Galaxy S24,Smartphone,2,"620.4"
+2,08-06-2026,Willem van Dijk,Apple iPad Pro,Tablet,1,1119
+3,08-06-2026,Sanne de Vries,Apple MacBook Air,Laptop,5,1499
+4,08-06-2026,Emma van der Meer,Samsung Galaxy Watch 6,Smartwatch,8,"209.99"
+5,08-06-2026,Willem van Dijk,Apple Watch Series 9,Smartwatch,2,"419.5"
+6,08-06-2026,Pieter van der Berg,Samsung Galaxy Tab S9,Tablet,10,"364.34"
+7,08-06-2026,Jan de Jong,Dell XPS 15,Laptop,3,"1099.95"
+8,08-06-2026,Emma van der Meer,Samsung Galaxy S24,Smartphone,1,275
+9,08-06-2026,Sanne de Vries,Amazon Kindle Paperwhite,E-Reader,16,"179.99"
+10,08-06-2026,Sanne de Vries,Samsung Galaxy S24,Smartphone,7,"699.8"
