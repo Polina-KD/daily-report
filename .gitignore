@@ -6,3 +6,5 @@ __pycache__/
 report.log
 report.json
 report.md
+report.egg-info/
+.coverage

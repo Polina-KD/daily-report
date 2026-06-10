@@ -7,24 +7,26 @@ from report.report import create_report
 from report.writer import write_report
 
 
-def setup_logging():
+def setup_logging() -> None:
     logging.basicConfig(filename='report.log', level=logging.INFO,
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 
-
-def cli():
+def cli() -> None:
     setup_logging()
     logger = logging.getLogger(__name__)
     logger.info("CLI started!")
     parser = argparse.ArgumentParser(prog='Brightstone Logistics Report Generator',
                                      description='Convert CSV to JSON or Markdown')
-    parser.add_argument('-i', '--input', required=True, type=str, help='Input CSV file path')
+    parser.add_argument('-i', '--input', required=True, type=str,
+                        help='Input CSV file path')
     parser.add_argument('-o', '--output', required=True, type=str,
-                        help='“Output file with format (json or markdown)”')
-    parser.add_argument('-f', '--format', required=True, type=str, choices=['json', 'markdown'], )
-
+                        help='“Output file path with format (json or markdown)”')
+    parser.add_argument('-f', '--format', required=True, type=str,
+                        help='Format for output file (json or markdown)',
+                        choices=['json', 'markdown'], )
     args = parser.parse_args()
+
     try:
         orders_list = read_file(args.input)  # -> list[Order]
         report_result = create_report(orders_list)  # -> An instance of the ReportResult class
