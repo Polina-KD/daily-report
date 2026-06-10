@@ -3,8 +3,7 @@ import datetime
 import logging
 from typing import Sequence
 
-# from report.cli import logger
-from report.exceptions import InvalidCsvError, MissingColumnError
+from report.exceptions import InvalidCsvError, MissingColumnError, InvalidCsvError
 from report.models import Order
 
 logger = logging.getLogger(__name__)

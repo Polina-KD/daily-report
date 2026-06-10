@@ -1,5 +1,5 @@
 order_id,date,customer,product,category,quantity,price
-1,08-06-2026,Jan de Jong,Samsung Galaxy S24,Smartphone,2,"620.4"
+1,08-06-2026,Jan de Jong,Samsung Galaxy S24,Smartphone,"BUG","620.4"
 2,08-06-2026,Willem van Dijk,Apple iPad Pro,Tablet,1,1119
 3,08-06-2026,Sanne de Vries,Apple MacBook Air,Laptop,5,1499
 4,08-06-2026,Emma van der Meer,Samsung Galaxy Watch 6,Smartwatch,8,"209.99"
