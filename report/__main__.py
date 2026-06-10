@@ -1,6 +1,6 @@
 from report.cli import cli
 
-def main():
+def main() -> None:
     cli()
 
 if __name__ == '__main__':

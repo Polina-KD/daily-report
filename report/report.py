@@ -36,7 +36,7 @@ def calculate_total_revenue(orders: list[Order]) -> float:
     :param orders: list of orders.
     :return: total revenue.
     """
-    revenue = 0
+    revenue = 0.0
     for order in orders:
         revenue += order.price * order.quantity
     return revenue

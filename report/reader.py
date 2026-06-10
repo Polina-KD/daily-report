@@ -1,6 +1,7 @@
 import csv
 import datetime
 import logging
+from typing import Sequence
 
 # from report.cli import logger
 from report.exceptions import InvalidCsvError, MissingColumnError
@@ -9,7 +10,7 @@ from report.models import Order
 logger = logging.getLogger(__name__)
 
 
-def read_file(file_path) -> list[Order]:
+def read_file(file_path: str) -> list[Order]:
     orders_list: list[Order] = []
     logger.info("Reading CSV file...")
     with open(str(file_path), 'r', encoding="utf-8") as file:
@@ -18,10 +19,11 @@ def read_file(file_path) -> list[Order]:
         for row in reader:
             orders_list.append(parse_order_row(row))
     logger.info(f"Read orders from {file_path} successfully.")
+    # print("Order list", orders_list)
     return orders_list
 
 
-def validate_required_columns(headers_list: object) -> None:
+def validate_required_columns(headers_list: Sequence[str] | None) -> None:
     if headers_list is None or headers_list == []:
         raise MissingColumnError("CSV contains no headers at all. Or the list of headers is empty.")
     required_columns: list[str] = ['order_id',
