@@ -15,7 +15,7 @@ def write_report(input_path: str, output_path: str, file_format: str) -> None:
     report = create_report(input_path)
     if file_format == "json":
         write_json(output_path, report)
-    elif file_format == "md":
+    elif file_format == "markdown":
         write_markdown(output_path, report)
     else:
         raise ValueError(f"Unsupported file format: {file_format}")
