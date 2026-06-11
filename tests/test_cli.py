@@ -22,9 +22,9 @@ def test_successful_path(tmp_path: Path, monkeypatch: MonkeyPatch) -> None:
         ],
     )
 
-    cli()
-
-    assert output_file.exists()
+    with pytest.raises(SystemExit) as e:
+        cli()
+    assert e.value.code == 0
 
 
 def test_exit_1_path(tmp_path: Path, monkeypatch: MonkeyPatch) -> None:

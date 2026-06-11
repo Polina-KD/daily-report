@@ -88,3 +88,4 @@ def cli() -> None:
         exit(2)
     else:
         logger.info("CLI finished successfully!")
+        exit(0)
