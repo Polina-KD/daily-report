@@ -8,6 +8,11 @@ from report.writer import write_report
 
 
 def setup_logging() -> None:
+    """
+    Setup logging
+
+    :return: None
+    """
     logging.basicConfig(
         filename="report.log",
         level=logging.INFO,
@@ -16,6 +21,24 @@ def setup_logging() -> None:
 
 
 def cli() -> None:
+    """
+    Main entry point for the Brightstone Logistics CLI tool.
+
+    Parses command-line arguments, runs the full data pipeline,
+    and handles errors at the application level.
+
+    The tool:
+    - reads a CSV file with orders
+    - creates a daily report (totals, top customers/products, revenue per category)
+    - saves the report in JSON or Markdown format
+
+    Exit codes:
+        0 - success
+        1 - input/data error (invalid CSV, missing columns, etc.)
+        2 - system error (file access, permissions, unexpected errors)
+
+    :return: None
+    """
     setup_logging()
     logger = logging.getLogger(__name__)
     logger.info("CLI started!")
@@ -28,7 +51,7 @@ def cli() -> None:
         "--output",
         required=True,
         type=str,
-        help="“Output file path with format (json or markdown)”",
+        help="Output file path with format (json or markdown)",
     )
     parser.add_argument(
         "-f", "--format", required=True, type=str, help="Format for output file (json or markdown)"
