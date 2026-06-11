@@ -17,7 +17,7 @@ def create_report(orders: list[Order]) -> ReportResult:
         total_revenue=calculate_total_revenue(orders),
         top_products=calculate_top_n(orders, "product", 5),
         top_customers=calculate_top_n(orders, "customer", 5),
-        revenue_by_category=calculate_top_n(orders, "category", len(orders))
+        revenue_by_category=calculate_top_n(orders, "category", len(orders)),
     )
 
 
@@ -86,5 +86,6 @@ def aggregate_by_key(non_unique_list: list[tuple[str, float]]) -> list[tuple[str
         uniq_dict[key] = round(uniq_dict[key], 2)
     uniq_list = list(uniq_dict.items())
     return uniq_list
+
 
 # print(create_report("D:/PyPrograms/order.csv"))

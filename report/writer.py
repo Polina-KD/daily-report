@@ -32,7 +32,7 @@ def write_json(output_path: str, report: ReportResult) -> None:
     :param report: dataclass ReportResult.
     :return: None.
     """
-    with open(output_path, 'w', encoding="utf-8") as outfile:
+    with open(output_path, "w", encoding="utf-8") as outfile:
         json.dump(report.__dict__, outfile, indent=4)
 
 
@@ -61,5 +61,6 @@ def write_markdown(output_path: str, report: ReportResult) -> None:
         outfile.write("\n## Revenue per category\n")
         for name, value in report.revenue_by_category:
             outfile.write(f"- {name} — {value}\n")
+
 
 # write_report("D:/PyPrograms/order.csv", "report.json", "json")

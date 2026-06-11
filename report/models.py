@@ -16,6 +16,7 @@ class Order:
         quantity: Numbers of items ordered.
         price: Price per single product.
     """
+
     order_id: int
     date: datetime.date
     customer: str
@@ -37,6 +38,7 @@ class ReportResult:
         top_customers: Top 5 customers by total spend.
         revenue_by_category: Revenue per category sorted from high to low.
     """
+
     total_orders: int
     total_revenue: float
     top_products: list[tuple[str, float]]
