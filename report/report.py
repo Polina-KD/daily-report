@@ -15,6 +15,7 @@ def create_report(orders: list[Order]) -> ReportResult:
     """
     logger.info("Creating report...")
     return ReportResult(
+        report_date=str(orders[0].order_date),
         total_orders=calculate_total_number_of_orders(orders),
         total_revenue=calculate_total_revenue(orders),
         top_products=calculate_top_n(orders, "product", 5),
