@@ -11,6 +11,7 @@ The tool helps automate reporting so users do not need to open Excel manually.
 
 From a CSV file with orders, it generates:
 
+- report date
 - total number of orders
 - total revenue
 - top 5 products by revenue

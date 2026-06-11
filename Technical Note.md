@@ -30,11 +30,12 @@ Each order contains:
 - price
 
 The report is represented by the `ReportResult` class, which aggregates:
+- report date
 - total orders
 - total revenue
 - top customers
 - top products
-- revenue per category
+- revenue by category
 
 ---
 
