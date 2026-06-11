@@ -3,8 +3,8 @@ __pycache__/
 .venv/
 .pytest_cache/
 .mypy_cache/
+report.egg-info/
 report.log
 report.json
 report.md
-report.egg-info/
 .coverage

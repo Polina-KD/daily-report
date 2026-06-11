@@ -10,9 +10,11 @@ logger = logging.getLogger(__name__)
 def write_report(report: ReportResult, output_path: str, file_format: str) -> None:
     """
     Write report to a file (JSON or Markdown).
+
     :param report: an instance of the ReportResult dataclass.
     :param output_path: path to output file.
     :param file_format: format of output file.
+
     :return: None.
     """
     if file_format == "json":
@@ -28,19 +30,23 @@ def write_report(report: ReportResult, output_path: str, file_format: str) -> No
 def write_json(output_path: str, report: ReportResult) -> None:
     """
     Write report to a JSON file.
+
     :param output_path: path to output file.
     :param report: dataclass ReportResult.
+
     :return: None.
     """
-    with open(output_path, 'w', encoding="utf-8") as outfile:
+    with open(output_path, "w", encoding="utf-8") as outfile:
         json.dump(report.__dict__, outfile, indent=4)
 
 
 def write_markdown(output_path: str, report: ReportResult) -> None:
     """
     Write report to a Markdown file.
+
     :param output_path: path to output file.
     :param report: dataclass ReportResult.
+
     :return: None.
     """
     with open(output_path, "w", encoding="utf-8") as outfile:
@@ -62,4 +68,4 @@ def write_markdown(output_path: str, report: ReportResult) -> None:
         for name, value in report.revenue_by_category:
             outfile.write(f"- {name} — {value}\n")
 
-# write_report("D:/PyPrograms/order.csv", "report.json", "json")
+
