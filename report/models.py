@@ -32,6 +32,7 @@ class ReportResult:
     Represents a result from WMS export CSV file.
 
     Attributes:
+        report_date: Date string for the report.
         total_orders: Total number of orders.
         total_revenue: Total revenue of orders.
         top_products: Top 5 products by revenue.
@@ -39,6 +40,7 @@ class ReportResult:
         revenue_by_category: Revenue per category sorted from high to low.
     """
 
+    report_date: str
     total_orders: int
     total_revenue: float
     top_products: list[tuple[str, float]]

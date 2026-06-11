@@ -50,7 +50,7 @@ def write_markdown(output_path: str, report: ReportResult) -> None:
     :return: None.
     """
     with open(output_path, "w", encoding="utf-8") as outfile:
-        outfile.write("# Daily Report\n\n")
+        outfile.write(f"# Daily Report {report.report_date}\n\n")
 
         outfile.write("## Summary\n\n")
         outfile.write(f"- Total orders: {report.total_orders}\n")
