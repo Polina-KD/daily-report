@@ -108,6 +108,7 @@ def invalid_file_format() -> str:
 @pytest.fixture
 def valid_report_results() -> ReportResult:
     return ReportResult(
+        report_date="2026-06-08",
         total_orders=10,
         total_revenue=27370.41,
         top_products=[
@@ -135,8 +136,9 @@ def valid_report_results() -> ReportResult:
 
 
 @pytest.fixture
-def valid_json_report() -> dict[str, int | float | list[list[str | float]]]:
+def valid_json_report() -> dict[str, str | int | float | list[list[str | float]]]:
     return {
+        "report_date": "2026-06-08",
         "total_orders": 10,
         "total_revenue": 27370.41,
         "top_products": [

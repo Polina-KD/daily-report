@@ -9,7 +9,7 @@ class Order:
 
     Attributes:
         order_id: Unique order ID.
-        order_date: Date when the order was placed.
+        date: Date when the order was placed.
         customer: Customer full name.
         product: Name of the product ordered.
         category: Product category.
@@ -18,7 +18,7 @@ class Order:
     """
 
     order_id: int
-    order_date: datetime.date
+    date: datetime.date
     customer: str
     product: str
     category: str

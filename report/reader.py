@@ -89,7 +89,7 @@ def parse_order_row(row: dict[str, str]) -> Order:
         is_row_broken(row)
         order = Order(
             order_id=int(row["order_id"]),
-            order_date=convert_str_to_date(row["date"]),
+            date=convert_str_to_date(row["date"]),
             customer=row["customer"],
             product=row["product"],
             category=row["category"],
